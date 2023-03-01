@@ -1,6 +1,6 @@
 name: Test, Build, and Deploy | Modul 01 - Lab2.2 Senior Project
 
-on:
+on: 
   push:
     branches: [main]
 
@@ -17,7 +17,7 @@ jobs:
       - name: Testing Build pre-Deploy
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-versio: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm i
       - run: npm run build
@@ -38,26 +38,26 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: |
+          scripts: |
             eval "$(ssh-agent -s)"
-            sudo ssh-add ~/.ssh/senpro-ssh-5
+            ssh-add ~/.ssh/ssh-senpro-5
             echo "Cek folder project";
-            [ ! -d "/home/seniorproject-rabu/senpro/456363/modul01/senpro-github-action/" ] &&
-              { 
-                echo "Repository belum di-clone. Cloning...";
-                sudo cd ~/senpro/456363/modul01;
-                sudo git clone git@github.com:daffaromero/senpro-github-action.git;
-                sudo cd ~/senpro/456363/modul01/senpro-github-action;
-                echo "Install Package dan Build Project";
-                npm install;
-                npm run build;
-              } ||
-              {
-                echo "Repository sudah ada. Building...";                
-                sudo cd ~/senpro/456363/modul01/senpro-github-action;
-                sudo git restore .;
-                sudo git pull origin main;
-                echo "Install Package dan Build Project";
-                npm install;
-                npm run build;
-              }
+            [ ! -d "/home/seniorproject-rabu/senpro/456363/modul01/senpro-github-action/"] &&
+            {
+              echo "Repository belum di-clone. Cloning...";
+              mkdir -p ~/senpro/460560/modul01;
+              cd ~/senpro/456363/modul01;
+              git clone git@github.com:daffaromero/senpro-github-action.git;
+              echo "Install Package dan Build Project";
+              npm install;
+              npm run build;
+            }||
+            {
+              echo "Repository sudah ada. Building...";
+              cd ~/senpro/456363/modul01/senpro-github-action;
+              git restore .;
+              git pull origin main;
+              echo "Install Package dan Build Project";
+              npm install;
+              npm run build;
+            }
