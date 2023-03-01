@@ -39,8 +39,8 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            sudo eval "$(ssh-agent -s)"
-            sudo ssh-add ~/.ssh/senpro-ssh-5
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/senpro-ssh-5
             echo "Cek folder project";
             [ ! -d "/home/seniorproject-rabu/senpro/456363/modul01/senpro-github-action/" ] &&
               { 
